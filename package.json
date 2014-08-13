@@ -4,6 +4,7 @@
   "description": "Export a PostgreSQL schema as JSON",
   "main": "index.js",
   "dependencies": {
+    "lodash": "^2.4.1",
     "pg.js": "^3.4.2"
   },
   "devDependencies": {},
