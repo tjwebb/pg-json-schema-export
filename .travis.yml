@@ -1,0 +1,5 @@
+deploy:
+  provider: npm
+  email: me@traviswebb.com
+  api_key:
+    secure: KRPpf+/iv3FJBYboRyq7CmRsG7mda8/JG8udUj/bmWIopCW3/hvKxa3rkpZX9gYfshk0Lw7vS/k6LikoTb7l6mOX2HqxnLxvdAaTYruVFRGT0LRJ0nOzZK+WbL7inkoh2S3C/RTwZmPKooYFIlJDpUn6zKANQgdLwnGrgxaXgNg=

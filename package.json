@@ -1,0 +1,36 @@
+{
+  "name": "pg-json-schema-export",
+  "version": "0.0.0",
+  "description": "Export a PostgreSQL schema as JSON",
+  "main": "index.js",
+  "dependencies": {
+    "pg.js": "^3.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tjwebb/pg-json-schema-export.git"
+  },
+  "keywords": [
+    "postgres",
+    "schema",
+    "export",
+    "json",
+    "etl",
+    "migration",
+    "replication",
+    "transform",
+    "extract",
+    "information_schema",
+    "pg"
+  ],
+  "author": "Travis Webb <me@traviswebb.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjwebb/pg-json-schema-export/issues"
+  },
+  "homepage": "https://github.com/tjwebb/pg-json-schema-export"
+}
