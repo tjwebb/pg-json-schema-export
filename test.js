@@ -12,7 +12,7 @@ describe('pg-json-schema-export', function () {
   };
 
   describe('#toJSON', function () {
-    this.timeout(20000);
+    this.timeout(process.env.TRAVIS ? 60 * 1000 : 20000);
 
     var schema;
     before(function (done) {
