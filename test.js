@@ -13,15 +13,17 @@ describe('pg-json-schema-export', function () {
   describe('#toJSON', function () {
     var schema;
     before(function (done) {
-      pgSchema.toJSON(options, function (err, _schema) {
-        schema = _schema;
-        done(err);
-      });
+      pgSchema.toJSON(options)
+        .then(function (_schema) {
+          schema = _schema;
+          done();
+        })
+        .catch(done);
     });
 
     it('should return an object', function () {
+      //console.log(JSON.stringify(schema, null, 2));
       assert(_.isObject(schema));
-      console.log(JSON.stringify(schema, null, 2));
     });
 
     describe('can access specific columns with js dot-notation', function () {
@@ -29,6 +31,9 @@ describe('pg-json-schema-export', function () {
         assert(_.isObject(schema.public));
         assert(_.isObject(schema.public.cashrcpt));
         assert(_.isObject(schema.public.cashrcpt.cashrcpt_notes));
+      });
+      it('public.atlasmap.atlasmap_headerline.col_description', function () {
+        assert(_.isString(schema.public.atlasmap.atlasmap_headerline.col_description));
       });
     });
 
