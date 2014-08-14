@@ -21,7 +21,7 @@ before_script:
   - psql -c 'create database test;' -U postgres
   - psql -c 'create role xtrole;' -U postgres
   - psql -c 'create role admin;' -U postgres
-  - pg_restore --schema-only -e -d test xtuple_demo_460.backup
+  - pg_restore -e -d test xtuple_demo_460.backup
 
 deploy:
   provider: npm
