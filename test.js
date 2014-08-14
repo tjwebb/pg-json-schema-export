@@ -38,8 +38,8 @@ describe('pg-json-schema-export', function () {
       it('public.tables.atlasmap.atlasmap_headerline.col_description', function () {
         assert(_.isString(schema.public.tables.atlasmap.atlasmap_headerline.col_description));
       });
-      it('xt.views.act.prjtaskext_priority_id.fkey', function () {
-        assert(_.isString(schema.xt.views.act.prjtaskext_priority_id.fkey));
+      it('api.views.accountfile.crmacct_id.data_type', function () {
+        assert(_.isString(schema.api.views.accountfile.crmacct_id.data_type));
       });
     });
 
