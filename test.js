@@ -1,3 +1,4 @@
+var fs = require('fs');
 var assert = require('assert');
 var _ = require('lodash');
 var pgSchema = require('./');
@@ -22,8 +23,8 @@ describe('pg-json-schema-export', function () {
     });
 
     it('should return an object', function () {
-      //console.log(JSON.stringify(schema, null, 2));
       assert(_.isObject(schema));
+      fs.writeFileSync('schema_mocha.json', JSON.stringify(schema, null, 2));
     });
 
     describe('can access specific columns with js dot-notation', function () {
