@@ -3,6 +3,12 @@ node_js:
   - "0.10"
   - "0.11"
 
+global:
+  env:
+    - POSTGRES_HOST=localhost
+    - POSTGRES_PORT=5432
+    - POSTGRES_USER=postgres
+
 addons:
   postgresql: "9.3"
 

@@ -4,6 +4,23 @@ var _ = require('lodash');
 var sql = require('./sql');
 var pg = require('pg.js');
 
+/**
+ * Export a pg schema to json.
+ *
+ * @param options
+ * @param cb
+ * @returns {
+ *  'schemaA': {
+ *    'table1': {
+ *      'column1: {
+ *        'data_type': 'text',
+ *        'is_nullable': true,
+ *        ...
+ *      }
+ *    }
+ *  }
+ * }
+ */
 exports.toJSON = function (options, cb) {
   if (!_.isFunction(cb)) throw new TypeError('callback must be provided');
 
@@ -26,4 +43,3 @@ function buildDatabaseSchema (rows) {
 
   return schemas;
 }
-
