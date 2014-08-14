@@ -8,7 +8,9 @@
     "lodash": "^2.4.1",
     "pg.js": "^3.4.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  },
   "scripts": {
     "test": "POSTGRES_DATABASE=demo_pilot mocha --reporter spec"
   },
