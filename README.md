@@ -30,7 +30,7 @@ PostgresSchema.toJSON(connection)
 ```
 
 ## Output Format
-The output format is for the most part named after the columns in `[information_schema](http://www.postgresql.org/docs/9.3/static/information-schema.html)`.
+The output format is for the most part named after the columns in [`information_schema`](http://www.postgresql.org/docs/9.3/static/information-schema.html).
 
 #### Structure
 - schemas
