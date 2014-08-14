@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var sql = require('./sql');
-var pg = require('pg.js');
 
 /**
  * Export a pg schema to json.
@@ -21,25 +20,31 @@ var pg = require('pg.js');
  *  }
  * }
  */
-exports.toJSON = function (options, cb) {
+exports.toJSON = function (connection, cb) {
   if (!_.isFunction(cb)) throw new TypeError('callback must be provided');
 
-  var client = new pg.Client(options);
-  client.connect();
+  var knex = require('knex')({ client: 'pg', connection: connection });
 
-  var database = client.query(sql.database, function (err, result) {
-    client.end();
-    cb(err, !err && buildDatabaseSchema(result.rows));
-  });
+  knex.raw(sql.getAllSchemas)
+    .then(function (result) {
+      return [
+        transformSchema(result.rows),
+        knex.raw(sql.getTableComments)
+      ];
+    })
+    .spread(function (schemas, tableCommentSchema) {
+      cb(null, _.merge(schemas, transformSchema(tableCommentSchema)));
+    })
+    .catch(function (error) {
+      cb(error);
+    });
 
 };
 
-function buildDatabaseSchema (rows) {
-  var schemas = _.transform(_.groupBy(rows, 'table_schema'), function (schema, tables, schemaName) {
+function transformSchema (rows) {
+  return _.transform(_.groupBy(rows, 'table_schema'), function (schema, tables, schemaName) {
     schema[schemaName] = _.transform(_.groupBy(tables, 'table_name'), function (table, columns, tableName) {
       table[tableName] = _.groupBy(columns, 'column_name');
     });
   });
-
-  return schemas;
 }

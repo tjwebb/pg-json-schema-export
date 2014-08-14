@@ -20,8 +20,8 @@ describe('pg-json-schema-export', function () {
     });
 
     it('should return an object', function () {
-      console.log(JSON.stringify(schema, null, 2));
       assert(_.isObject(schema));
+      console.log(JSON.stringify(schema, null, 2));
     });
 
     describe('can access specific columns with js dot-notation', function () {
