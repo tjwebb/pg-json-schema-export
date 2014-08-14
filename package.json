@@ -12,7 +12,7 @@
     "mocha": "^1.21.4"
   },
   "scripts": {
-    "test": "POSTGRES_DATABASE=demo_pilot mocha --reporter spec"
+    "test": "mocha --reporter spec"
   },
   "repository": {
     "type": "git",
