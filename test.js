@@ -4,11 +4,10 @@ var pgSchema = require('./');
 
 describe('pg-json-schema-export', function () {
   var options = {
-    user: 'alpha',
-    password: 'test',
-    database: 'demo_pilot',
-    host: 'localhost',
-    port: 5434
+    user: process.env.POSTGRES_USER || 'postgres',
+    password: process.env.POSTGRES_PASSWORD || 'postgres',
+    database: process.env.POSTGRES_DATABASE || 'postgres',
+    port: process.env.POSTGRES_PORT || 5432
   };
 
   describe('#toJSON', function () {

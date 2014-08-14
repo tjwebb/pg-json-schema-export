@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "POSTGRES_DATABASE=demo_pilot mocha --reporter spec"
   },
   "repository": {
     "type": "git",
