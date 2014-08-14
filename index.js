@@ -33,6 +33,7 @@ exports.toJSON = function (connection) {
       ];
     })
     .spread(function (sequences, tableSchemas) {
+      var table = transform(tableSchemas.rows, 'table');
       return [
         sequences,
         transform(tableSchemas.rows, 'table'),
@@ -48,12 +49,12 @@ exports.toJSON = function (connection) {
  * Don't look at this function. It transforms stuff.
  */
 function transform (rows, type) {
-  return _.transform(_.groupBy(_.compact(rows), type + '_schema'), function (schema, objects, schemaName) {
+  return _.transform(_.groupBy(rows, type + '_schema'), function (schema, objects, schemaName) {
     schema[schemaName] || (schema[schemaName] = { });
     schema[schemaName][type + 's'] = _.transform(
-      _.groupBy(_.compact(objects), type + '_name'), function (object, columns, objectName) {
+      _.groupBy(objects, type + '_name'), function (object, columns, objectName) {
         object[objectName] = _.transform(
-          _.groupBy(_.compact(columns), 'column_name'), function (column, properties, columnName) {
+          _.groupBy(columns, 'column_name'), function (column, properties, columnName) {
             delete properties.obj_description;
             column[columnName] = properties[0];
           });
