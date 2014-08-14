@@ -12,6 +12,8 @@ describe('pg-json-schema-export', function () {
   };
 
   describe('#toJSON', function () {
+    this.timeout(20000);
+
     var schema;
     before(function (done) {
       pgSchema.toJSON(options)
@@ -28,13 +30,16 @@ describe('pg-json-schema-export', function () {
     });
 
     describe('can access specific columns with js dot-notation', function () {
-      it('public.cashrcpt.cashrcpt_notes', function () {
-        assert(_.isObject(schema.public));
-        assert(_.isObject(schema.public.cashrcpt));
-        assert(_.isObject(schema.public.cashrcpt.cashrcpt_notes));
+      it('public.tables.cashrcpt.cashrcpt_notes', function () {
+        assert(_.isObject(schema.public.tables));
+        assert(_.isObject(schema.public.tables.cashrcpt));
+        assert(_.isObject(schema.public.tables.cashrcpt.cashrcpt_notes));
       });
-      it('public.atlasmap.atlasmap_headerline.col_description', function () {
-        assert(_.isString(schema.public.atlasmap.atlasmap_headerline.col_description));
+      it('public.tables.atlasmap.atlasmap_headerline.col_description', function () {
+        assert(_.isString(schema.public.tables.atlasmap.atlasmap_headerline.col_description));
+      });
+      it('xt.views.act.prjtaskext_priority_id.fkey', function () {
+        assert(_.isString(schema.xt.views.act.prjtaskext_priority_id.fkey));
       });
     });
 

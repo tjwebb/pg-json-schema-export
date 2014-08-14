@@ -2,7 +2,9 @@
 
 var _ = require('lodash');
 var fs = require('fs');
-var getAllSchemas = fs.readFileSync('./sql/all_schemas.sql').toString();
+var getTableSchemas = fs.readFileSync('./sql/tables.sql').toString();
+var getViewSchemas = fs.readFileSync('./sql/views.sql').toString();
+var getSequences = fs.readFileSync('./sql/sequences.sql').toString();
 
 /**
  * Export a pg schema to json.
@@ -23,23 +25,34 @@ var getAllSchemas = fs.readFileSync('./sql/all_schemas.sql').toString();
 exports.toJSON = function (connection) {
   var knex = require('knex')({ client: 'pg', connection: connection });
 
-  return knex.raw(getAllSchemas)
-    .then(function (result) {
-      return transformSchema(result.rows);
+  return knex.raw(getSequences)
+    .then(function (sequenceResult) {
+      return [
+        transform(sequenceResult.rows, 'sequence'),
+        knex.raw(getTableSchemas)
+      ];
     })
-    .then(function (schemas, tableCommentSchema) {
-      return _.merge(schemas, transformSchema(tableCommentSchema));
+    .spread(function (sequences, tableSchemas) {
+      return [
+        sequences,
+        transform(tableSchemas.rows, 'table'),
+        knex.raw(getViewSchemas)
+      ];
+    })
+    .spread(function (sequences, tableSchemas, viewSchemas) {
+      return _.merge(transform(viewSchemas.rows, 'view'), tableSchemas, sequences);
     });
 };
 
 /**
  * Don't look at this function. It transforms stuff.
  */
-function transformSchema (rows) {
-  return _.transform(_.groupBy(_.compact(rows), 'table_schema'), function (schema, tables, schemaName) {
-    schema[schemaName] = _.transform(
-      _.groupBy(_.compact(tables), 'table_name'), function (table, columns, tableName) {
-        table[tableName] = _.transform(
+function transform (rows, type) {
+  return _.transform(_.groupBy(_.compact(rows), type + '_schema'), function (schema, objects, schemaName) {
+    schema[schemaName] || (schema[schemaName] = { });
+    schema[schemaName][type + 's'] = _.transform(
+      _.groupBy(_.compact(objects), type + '_name'), function (object, columns, objectName) {
+        object[objectName] = _.transform(
           _.groupBy(_.compact(columns), 'column_name'), function (column, properties, columnName) {
             delete properties.obj_description;
             column[columnName] = properties[0];
