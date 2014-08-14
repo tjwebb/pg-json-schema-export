@@ -25,6 +25,7 @@ before_script:
   - pg_restore -e -d test xtuple_demo_460.backup
 
 after_failure:
+  - env
   - cat schema_mocha.json
 
 deploy:
