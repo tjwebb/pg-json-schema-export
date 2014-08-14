@@ -24,6 +24,9 @@ before_script:
   - psql -c 'create role admin;' -U postgres
   - pg_restore -e -d test xtuple_demo_460.backup
 
+after_failure:
+  - cat schema_mocha.json
+
 deploy:
   provider: npm
   email: me@traviswebb.com
