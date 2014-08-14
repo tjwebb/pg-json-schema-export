@@ -13,6 +13,9 @@ global:
 addons:
   postgresql: "9.3"
 
+notifications:
+  email: false
+
 before_script:
   - wget http://sourceforge.net/projects/postbooks/files/03%20PostBooks-databases/4.6.0/postbooks_demo-4.6.0.backup/download -O xtuple_demo_460.backup
   - psql -c 'create database test;' -U postgres
