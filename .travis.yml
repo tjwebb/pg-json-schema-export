@@ -15,7 +15,7 @@ addons:
 
 before_script:
   - wget http://sourceforge.net/projects/postbooks/files/03%20PostBooks-databases/4.6.0/postbooks_demo-4.6.0.backup/download -O xtuple_demo_460.backup
-  - pg_restore -C -d $POSTGRES_DATABASE xtuple_demo_460.backup
+  - pg_restore -C -d test xtuple_demo_460.backup
 
 deploy:
   provider: npm
