@@ -24,6 +24,9 @@ before_script:
   - psql -c 'create role admin;' -U postgres
   - pg_restore -e -d test xtuple_demo_460.backup
 
+after_success:
+  - head -n 500 schema_mocha.json
+
 after_failure:
   - env
 

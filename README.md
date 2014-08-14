@@ -29,8 +29,43 @@ PostgresSchema.toJSON(connection)
   });
 ```
 
+## Output Format
+The output format is for the most part named after the columns in `information_schema`.
+
+#### Structure
+- schemas
+  - views
+    - columns
+  - tables
+    - columns
+  - sequences
+
+
+#### JSON
+```json
+{
+  "public": {
+    "tables": {
+      "user": {
+        "name: {
+          "data_type": "text",
+          ...
+        }
+      },
+      ...
+    },
+    "views": {
+      ...
+    },
+    "sequences": {
+
+    }
+```
+I also print out the first 500 lines of the test file JSON during CI builds: https://travis-ci.org/tjwebb/pg-json-schema-export.
+
 ## More Info
-- Unit tests: https://github.com/tjwebb/pg-json-schema-export/blob/master/test.js
+- unit tests: https://github.com/tjwebb/pg-json-schema-export/blob/master/test.js
 - npm: https://www.npmjs.org/package/pg-json-schema-export
+- travis-ci: https://travis-ci.org/tjwebb/pg-json-schema-export
 - github: https://github.com/tjwebb/pg-json-schema-export
-- License: MIT
+- license: MIT
