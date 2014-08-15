@@ -47,9 +47,12 @@ The output format is for the most part named after the columns in [`information_
   "public": {
     "tables": {
       "user": {
-        "name: {
-          "data_type": "text",
-          ...
+        "obj_description": "This table has Users in it",
+        "columns": {
+          "name: {
+            "data_type": "text",
+            ...
+          }
         }
       },
       ...
