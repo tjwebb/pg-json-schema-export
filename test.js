@@ -26,7 +26,7 @@ describe('pg-json-schema-export', function () {
 
     it('should return an object', function () {
       assert(_.isObject(schemas));
-      fs.writeFileSync('schema_mocha.json', JSON.stringify(schemas, null, 2));
+      fs.writeFileSync('postbooks_demo_460.json', JSON.stringify(schemas, null, 2));
     });
 
     describe('can access specific objects with js dot-notation', function () {
