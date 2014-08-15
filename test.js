@@ -1,7 +1,7 @@
 var fs = require('fs');
 var assert = require('assert');
 var _ = require('lodash');
-var pgSchema = require('./');
+var exporter = require('./');
 
 describe('pg-json-schema-export', function () {
   var options = {
@@ -16,7 +16,7 @@ describe('pg-json-schema-export', function () {
 
     var schemas;
     before(function (done) {
-      pgSchema.toJSON(options)
+      exporter.toJSON(options)
         .then(function (_schemas) {
           schemas = _schemas;
           done();
@@ -43,6 +43,9 @@ describe('pg-json-schema-export', function () {
       });
       it('public.sequences.taxpay_taxpay_id_seq.cycle_option', function () {
         assert(_.isString(schemas.public.sequences.taxpay_taxpay_id_seq.cycle_option));
+      });
+      it('public.tables.acalitem.columns.acalitem_id.constraint_type', function () {
+        assert(_.isString(schemas.public.tables.acalitem.columns.acalitem_id.constraint_type));
       });
     });
 
