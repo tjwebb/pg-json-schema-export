@@ -1,7 +1,7 @@
+/* esnext: false */
 'use strict';
 
-global.Promise || (global.Promise = require('bluebird'));
-
+var Promise = require('bluebird');
 var _ = require('lodash');
 var fs = require('fs');
 var getTableSchemas = fs.readFileSync('./sql/tables.sql').toString();
