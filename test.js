@@ -30,16 +30,16 @@ describe('pg-json-schema-export', function () {
     });
 
     describe('can access specific columns with js dot-notation', function () {
-      it('public.tables.cashrcpt.cashrcpt_notes', function () {
+      it('public.tables.cashrcpt.columns.cashrcpt_notes', function () {
         assert(_.isObject(schema.public.tables));
         assert(_.isObject(schema.public.tables.cashrcpt));
-        assert(_.isObject(schema.public.tables.cashrcpt.cashrcpt_notes));
+        assert(_.isObject(schema.public.tables.cashrcpt.columns.cashrcpt_notes));
       });
-      it('public.tables.atlasmap.atlasmap_headerline.col_description', function () {
-        assert(_.isString(schema.public.tables.atlasmap.atlasmap_headerline.col_description));
+      it('public.tables.atlasmap.columns.atlasmap_headerline.col_description', function () {
+        assert(_.isString(schema.public.tables.atlasmap.columns.atlasmap_headerline.col_description));
       });
-      it('api.views.accountfile.crmacct_id.data_type', function () {
-        assert(_.isString(schema.api.views.accountfile.crmacct_id.data_type));
+      it('api.views.accountfile.columns.crmacct_id.data_type', function () {
+        assert(_.isString(schema.api.views.accountfile.columns.crmacct_id.data_type));
       });
     });
 

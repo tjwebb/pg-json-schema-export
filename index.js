@@ -1,5 +1,7 @@
 'use strict';
 
+global.Promise || (global.Promise = require('bluebird'));
+
 var _ = require('lodash');
 var fs = require('fs');
 var getTableSchemas = fs.readFileSync('./sql/tables.sql').toString();
@@ -24,24 +26,19 @@ var getSequences = fs.readFileSync('./sql/sequences.sql').toString();
  */
 exports.toJSON = function (connection) {
   var knex = require('knex')({ client: 'pg', connection: connection });
+  var queries = [
+    knex.raw(getSequences),
+    knex.raw(getTableSchemas),
+    knex.raw(getViewSchemas)
+  ];
 
-  return knex.raw(getSequences)
-    .then(function (sequenceResult) {
-      return [
-        transform(sequenceResult.rows, 'sequence'),
-        knex.raw(getTableSchemas)
-      ];
-    })
-    .spread(function (sequences, tableSchemas) {
-      var table = transform(tableSchemas.rows, 'table');
-      return [
-        sequences,
-        transform(tableSchemas.rows, 'table'),
-        knex.raw(getViewSchemas)
-      ];
-    })
-    .spread(function (sequences, tableSchemas, viewSchemas) {
-      return _.merge(transform(viewSchemas.rows, 'view'), tableSchemas, sequences);
+  return Promise.all(queries)
+    .spread(function (sequences, tables, views) {
+      return _.merge(
+        transform(sequences.rows, 'sequence'),
+        transform(tables.rows, 'table'),
+        transform(views.rows, 'view')
+      );
     });
 };
 
@@ -49,15 +46,19 @@ exports.toJSON = function (connection) {
  * Don't look at this function. It transforms stuff.
  */
 function transform (rows, type) {
-  return _.transform(_.groupBy(rows, type + '_schema'), function (schema, objects, schemaName) {
-    schema[schemaName] || (schema[schemaName] = { });
-    schema[schemaName][type + 's'] = _.transform(
-      _.groupBy(objects, type + '_name'), function (object, columns, objectName) {
-        object[objectName] = _.transform(
-          _.groupBy(columns, 'column_name'), function (column, properties, columnName) {
-            delete properties.obj_description;
-            column[columnName] = properties[0];
-          });
-      });
-  });
+  return _.transform(
+    _.groupBy(rows, type + '_schema'), function (schema, objects, schemaName) {
+      schema[schemaName] = { };
+      schema[schemaName][type + 's'] = _.transform(
+        _.groupBy(objects, type + '_name'), function (object, columns, objectName) {
+          object[objectName] = {
+            obj_description: columns[0].obj_description
+          };
+          object[objectName].columns = _.transform(
+            _.groupBy(columns, 'column_name'), function (column, properties, columnName) {
+              delete properties[0].obj_description;
+              column[columnName] = properties[0];
+            });
+        });
+    });
 }
