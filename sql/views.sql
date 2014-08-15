@@ -1,4 +1,5 @@
 select
+  distinct on (view_schema, view_name, column_name)
   view_schema,
   view_name,
   column_name,
@@ -16,8 +17,7 @@ select
   constraint_name,
   constraint_type,
   unique_constraint_name,
-  position_in_unique_constraint,
-  pg_get_serial_sequence(table_schema || '.' || table_name, column_name) as sequence_name
+  position_in_unique_constraint
 
 from information_schema.columns
 natural full join information_schema.views

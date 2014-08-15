@@ -1,4 +1,5 @@
 select
+  distinct on (table_schema, table_name, column_name)
   table_schema,
   table_name,
   column_name,
