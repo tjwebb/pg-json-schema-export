@@ -37,7 +37,7 @@ deploy:
       secure: KRPpf+/iv3FJBYboRyq7CmRsG7mda8/JG8udUj/bmWIopCW3/hvKxa3rkpZX9gYfshk0Lw7vS/k6LikoTb7l6mOX2HqxnLxvdAaTYruVFRGT0LRJ0nOzZK+WbL7inkoh2S3C/RTwZmPKooYFIlJDpUn6zKANQgdLwnGrgxaXgNg=
   - provider: releases
     api_key:
-      secure: GghGojfPthF4XPSyYdQ7nRKIK5Q9lpmrRhJ0zzWGx8cS8o+KxFZ7BgMFXr2Xm9OhZBCDtJJ0YVSJ9Kx2QtOrsU4TG86gkZUR2v7DLd+vRfqYP4kYMe1NsG8ndrWzKGIQnroPi4cDg7H+⇉
+      secure: GghGojfPthF4XPSyYdQ7nRKIK5Q9lpmrRhJ0zzWGx8cS8o+KxFZ7BgMFXr2Xm9OhZBCDtJJ0YVSJ9Kx2QtOrsU4TG86gkZUR2v7DLd+vRfqYP4kYMe1NsG8ndrWzKGIQnroPi4cDg7H+O+0eGfNzE8hl6l43FD5TJyHsZfnEkLE=
     file: build/postbooks_demo_460.json
     on:
       repo: tjwebb/pg-json-schema-export
