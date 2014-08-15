@@ -14,32 +14,35 @@ describe('pg-json-schema-export', function () {
   describe('#toJSON', function () {
     this.timeout(process.env.TRAVIS ? 60 * 1000 : 20000);
 
-    var schema;
+    var schemas;
     before(function (done) {
       pgSchema.toJSON(options)
-        .then(function (_schema) {
-          schema = _schema;
+        .then(function (_schemas) {
+          schemas = _schemas;
           done();
         })
         .catch(done);
     });
 
     it('should return an object', function () {
-      assert(_.isObject(schema));
-      fs.writeFileSync('schema_mocha.json', JSON.stringify(schema, null, 2));
+      assert(_.isObject(schemas));
+      fs.writeFileSync('schema_mocha.json', JSON.stringify(schemas, null, 2));
     });
 
-    describe('can access specific columns with js dot-notation', function () {
+    describe('can access specific objects with js dot-notation', function () {
       it('public.tables.cashrcpt.columns.cashrcpt_notes', function () {
-        assert(_.isObject(schema.public.tables));
-        assert(_.isObject(schema.public.tables.cashrcpt));
-        assert(_.isObject(schema.public.tables.cashrcpt.columns.cashrcpt_notes));
+        assert(_.isObject(schemas.public.tables));
+        assert(_.isObject(schemas.public.tables.cashrcpt));
+        assert(_.isObject(schemas.public.tables.cashrcpt.columns.cashrcpt_notes));
       });
       it('public.tables.atlasmap.columns.atlasmap_headerline.col_description', function () {
-        assert(_.isString(schema.public.tables.atlasmap.columns.atlasmap_headerline.col_description));
+        assert(_.isString(schemas.public.tables.atlasmap.columns.atlasmap_headerline.col_description));
       });
       it('api.views.accountfile.columns.crmacct_id.data_type', function () {
-        assert(_.isString(schema.api.views.accountfile.columns.crmacct_id.data_type));
+        assert(_.isString(schemas.api.views.accountfile.columns.crmacct_id.data_type));
+      });
+      it('public.sequences.taxpay_taxpay_id_seq.cycle_option', function () {
+        assert(_.isString(schemas.public.sequences.taxpay_taxpay_id_seq.cycle_option));
       });
     });
 

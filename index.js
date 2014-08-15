@@ -54,7 +54,8 @@ function transform (rows, type) {
           object[objectName] = {
             obj_description: columns[0].obj_description
           };
-          object[objectName].columns = _.transform(
+          if (type === 'sequence') _.extend(object[objectName], columns[0]);
+          else object[objectName].columns = _.transform(
             _.groupBy(columns, 'column_name'), function (column, properties, columnName) {
               delete properties[0].obj_description;
               column[columnName] = properties[0];
