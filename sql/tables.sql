@@ -11,7 +11,8 @@ select
   constraint_name,
   constraint_type,
   unique_constraint_name,
-  position_in_unique_constraint
+  position_in_unique_constraint,
+  pg_get_serial_sequence(table_schema || '.' || table_name, column_name) as sequence_name
 
 from information_schema.columns
 natural full join information_schema.constraint_column_usage
