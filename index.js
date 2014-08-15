@@ -35,9 +35,9 @@ exports.toJSON = function (connection) {
   return Promise.all(queries)
     .spread(function (sequences, tables, views) {
       return _.merge(
-        transform(sequences.rows, 'sequence'),
         transform(tables.rows, 'table'),
-        transform(views.rows, 'view')
+        transform(views.rows, 'view'),
+        transform(sequences.rows, 'sequence')
       );
     });
 };
