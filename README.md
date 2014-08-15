@@ -64,7 +64,9 @@ The output format is for the most part named after the columns in [`information_
 
     }
 ```
-I also print out the first 500 lines of the test file JSON during CI builds: https://travis-ci.org/tjwebb/pg-json-schema-export.
+I auto-generate some JSON during each CI build; those are uploaded as Github releases: https://github.com/tjwebb/pg-json-schema-export/releases/latest
+
+
 
 ## More Info
 - unit tests: https://github.com/tjwebb/pg-json-schema-export/blob/master/test.js
