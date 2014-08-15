@@ -1,6 +1,6 @@
 {
   "name": "pg-json-schema-export",
-  "version": "0.11.5",
+  "version": "0.11.6",
   "description": "Export a PostgreSQL schema as JSON",
   "main": "index.js",
   "dependencies": {
