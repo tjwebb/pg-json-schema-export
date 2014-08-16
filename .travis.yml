@@ -44,4 +44,5 @@ deploy:
     on:
       repo: tjwebb/pg-json-schema-export
       all_branches: true
+      tags: true
 
