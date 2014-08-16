@@ -39,7 +39,7 @@ describe('pg-json-schema-export', function () {
         assert(_.isString(db.tables.atlasmap.columns.atlasmap_headerline.col_description));
       });
       it('sequences.taxpay_taxpay_id_seq.cycle_option', function () {
-        assert(_.isString(db.sequences.taxpay_taxpay_id_seq.cycle_option));
+        assert(_.isString(db.sequences.taxpay.taxpay_id.cycle_option));
       });
       it('tables.acalitem.columns.acalitem_id', function () {
         assert(_.isObject(db.tables.acalitem.columns.acalitem_id));

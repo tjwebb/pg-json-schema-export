@@ -50,7 +50,9 @@ exports.toJSON = function (connection, schema) {
         constraints: _.transform(_.groupBy(constraints.rows, 'table_name'), function (result, table, tableName) {
           result[tableName] = _.groupBy(table, 'column_name');
         }),
-        sequences: _.indexBy(sequences.rows, 'sequence_name')
+        sequences: _.transform(_.groupBy(sequences.rows, 'table_name'), function (result, table, tableName) {
+          result[tableName] = _.indexBy(sequences.rows, 'column_name');
+        })
       };
     });
 };
