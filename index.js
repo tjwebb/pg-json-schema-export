@@ -3,7 +3,7 @@
 var Promise = require('bluebird');
 var _ = require('lodash');
 var fs = require('fs');
-var getTableSchemas = fs.readFileSync('./sql/tables.sql').toString();
+var sql = require('./sql');
 var getViewSchemas = fs.readFileSync('./sql/views.sql').toString();
 var getSequences = fs.readFileSync('./sql/sequences.sql').toString();
 
@@ -23,42 +23,26 @@ var getSequences = fs.readFileSync('./sql/sequences.sql').toString();
  *  }
  * }
  */
-exports.toJSON = function (connection) {
+exports.toJSON = function (connection, schema) {
   var knex = require('knex')({ client: 'pg', connection: connection });
   var queries = [
-    knex.raw(getSequences),
-    knex.raw(getTableSchemas),
-    knex.raw(getViewSchemas)
+    knex.raw(sql.getSequences, [schema]),
+    knex.raw(sql.getColumns, [schema]),
+    knex.raw(sql.getTables, [schema]),
+    knex.raw(sql.getConstraints, [schema])
   ];
 
   return Promise.all(queries)
-    .spread(function (sequences, tables, views) {
-      return _.merge(
-        transform(tables.rows, 'table'),
-        transform(views.rows, 'view'),
-        transform(sequences.rows, 'sequence')
-      );
+    .spread(function (sequences, columns, tables, constraints) {
+      var columnGroups = _.groupBy(columns.rows, 'table_name');
+      return {
+        tables: _.transform(_.indexBy(tables.rows, 'table_name'), function (result, table, name) {
+          result[name] = _.extend(table, {
+            columns: _.indexBy(columnGroups[name], 'column_name')
+          });
+        }),
+        constraints: _.indexBy(constraints.rows, 'table_name'),
+        sequences: _.indexBy(sequences.rows, 'sequence_name')
+      };
     });
 };
-
-/**
- * Don't look at this function. It transforms stuff.
- */
-function transform (rows, type) {
-  return _.transform(
-    _.groupBy(rows, type + '_schema'), function (schema, objects, schemaName) {
-      schema[schemaName] = { };
-      schema[schemaName][type + 's'] = _.transform(
-        _.groupBy(objects, type + '_name'), function (object, columns, objectName) {
-          object[objectName] = {
-            obj_description: columns[0].obj_description
-          };
-          if (type === 'sequence') _.extend(object[objectName], columns[0]);
-          else object[objectName].columns = _.transform(
-            _.groupBy(columns, 'column_name'), function (column, properties, columnName) {
-              delete properties[0].obj_description;
-              column[columnName] = properties[0];
-            });
-        });
-    });
-}

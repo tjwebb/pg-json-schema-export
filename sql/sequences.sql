@@ -1,14 +1,17 @@
 select
-  sequence_schema,
+  table_schema,
+  table_name,
+  column_name,
   sequence_name,
-  data_type,
   start_value,
   minimum_value,
-  maximum_value,
   increment,
   cycle_option
-  
-from information_schema.sequences
 
-where sequence_schema not in ('information_schema', 'pg_catalog')
-order by sequence_schema
+from information_schema.columns
+inner join information_schema.sequences on (
+  table_schema = sequence_schema and
+  pg_get_serial_sequence(table_schema || '.' || table_name, column_name) = sequence_schema || '.' || sequence_name
+)
+where sequence_schema = ?
+order by table_schema, table_name, ordinal_position

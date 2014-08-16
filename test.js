@@ -14,38 +14,35 @@ describe('pg-json-schema-export', function () {
   describe('#toJSON', function () {
     this.timeout(process.env.TRAVIS ? 60 * 1000 : 20000);
 
-    var schemas;
+    var db;
     before(function (done) {
-      exporter.toJSON(options)
-        .then(function (_schemas) {
-          schemas = _schemas;
+      exporter.toJSON(options, 'public')
+        .then(function (_db) {
+          db = _db;
           done();
         })
         .catch(done);
     });
 
     it('should return an object', function () {
-      assert(_.isObject(schemas));
-      fs.writeFileSync('build/postbooks_demo_460.json', JSON.stringify(schemas, null, 2));
+      assert(_.isObject(db));
+      fs.writeFileSync('build/postbooks_demo_460.json', JSON.stringify(db, null, 2));
     });
 
     describe('can access specific objects with js dot-notation', function () {
-      it('public.tables.cashrcpt.columns.cashrcpt_notes', function () {
-        assert(_.isObject(schemas.public.tables));
-        assert(_.isObject(schemas.public.tables.cashrcpt));
-        assert(_.isObject(schemas.public.tables.cashrcpt.columns.cashrcpt_notes));
+      it('tables.cashrcpt.columns.cashrcpt_notes', function () {
+        assert(_.isObject(db.tables));
+        assert(_.isObject(db.tables.cashrcpt));
+        assert(_.isObject(db.tables.cashrcpt.columns.cashrcpt_notes));
       });
-      it('public.tables.atlasmap.columns.atlasmap_headerline.col_description', function () {
-        assert(_.isString(schemas.public.tables.atlasmap.columns.atlasmap_headerline.col_description));
+      it('tables.atlasmap.columns.atlasmap_headerline.col_description', function () {
+        assert(_.isString(db.tables.atlasmap.columns.atlasmap_headerline.col_description));
       });
-      it('api.views.accountfile.columns.crmacct_id.data_type', function () {
-        assert(_.isString(schemas.api.views.accountfile.columns.crmacct_id.data_type));
+      it('sequences.taxpay_taxpay_id_seq.cycle_option', function () {
+        assert(_.isString(db.sequences.taxpay_taxpay_id_seq.cycle_option));
       });
-      it('public.sequences.taxpay_taxpay_id_seq.cycle_option', function () {
-        assert(_.isString(schemas.public.sequences.taxpay_taxpay_id_seq.cycle_option));
-      });
-      it('public.tables.acalitem.columns.acalitem_id.constraint_type', function () {
-        assert(_.isString(schemas.public.tables.acalitem.columns.acalitem_id.constraint_type));
+      it('tables.acalitem.columns.acalitem_id', function () {
+        assert(_.isObject(db.tables.acalitem.columns.acalitem_id));
       });
     });
 
