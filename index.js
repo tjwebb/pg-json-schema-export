@@ -36,12 +36,20 @@ exports.toJSON = function (connection, schema) {
     .spread(function (sequences, columns, tables, constraints) {
       var columnGroups = _.groupBy(columns.rows, 'table_name');
       return {
+        _count: {
+          sequences: sequences.rowCount,
+          constraints: constraints.rowCount,
+          tables: tables.rowCount,
+          columns: columns.rowCount
+        },
         tables: _.transform(_.indexBy(tables.rows, 'table_name'), function (result, table, name) {
           result[name] = _.extend(table, {
             columns: _.indexBy(columnGroups[name], 'column_name')
           });
         }),
-        constraints: _.indexBy(constraints.rows, 'table_name'),
+        constraints: _.transform(_.groupBy(constraints.rows, 'table_name'), function (result, table, tableName) {
+          result[tableName] = _.groupBy(table, 'column_name');
+        }),
         sequences: _.indexBy(sequences.rows, 'sequence_name')
       };
     });

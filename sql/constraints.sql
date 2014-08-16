@@ -1,7 +1,7 @@
 select
-  table_schema,
-  table_name,
-  column_name,
+  coalesce(table_schema, referenced_schema) as table_schema,
+  coalesce(table_name, referenced_table) as table_name,
+  coalesce(column_name, referenced_column) as column_name,
   constraint_schema,
   constraint_name,
   constraint_type,
@@ -13,7 +13,7 @@ select
 from information_schema.table_constraints
 natural full join information_schema.key_column_usage
 natural full join information_schema.check_constraints
-left join (
+inner join (
   select
     table_schema as referenced_schema,
     table_name as referenced_table,
