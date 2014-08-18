@@ -50,7 +50,7 @@ The output format is for the most part named after the columns in [`information_
     "user": {
       "obj_description": "This table has Users in it",
       "columns": {
-        "name: {
+        "name": {
           "data_type": "text",
           // ... more columns
         }
