@@ -1,9 +1,9 @@
 pg-json-schema-export
 =====================
 
-[![Build Status](https://travis-ci.org/tjwebb/pg-json-schema-export.svg)](https://travis-ci.org/tjwebb/pg-json-schema-export)
-[![NPM version](https://badge.fury.io/js/pg-json-schema-export.svg)](http://badge.fury.io/js/pg-json-schema-export)
-[![Dependency Status](https://david-dm.org/tjwebb/pg-json-schema-export.svg)](https://david-dm.org/tjwebb/pg-json-schema-export)
+[![NPM version][npm-image]][npm-url]
+[![Build status][travis-image]][travis-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
 
 Export a Postgres schema as JSON
 
@@ -70,9 +70,13 @@ I auto-generate some JSON during each CI build; those are uploaded as Github rel
 
 
 
-## More Info
-- unit tests: https://github.com/tjwebb/pg-json-schema-export/blob/master/test.js
-- npm: https://www.npmjs.org/package/pg-json-schema-export
-- travis-ci: https://travis-ci.org/tjwebb/pg-json-schema-export
-- github: https://github.com/tjwebb/pg-json-schema-export
-- license: MIT
+## License
+MIT
+
+
+[npm-image]: https://img.shields.io/npm/v/pg-json-schema-export.svg?style=flat
+[npm-url]: https://npmjs.org/package/pg-json-schema-export
+[travis-image]: https://img.shields.io/travis/tjwebb/pg-json-schema-export.svg?style=flat
+[travis-url]: https://travis-ci.org/tjwebb/pg-json-schema-export
+[daviddm-image]: https://david-dm.org/tjwebb/pg-json-schema-export.svg?style=flat
+[daviddm-url]: https://david-dm.org/tjwebb/pg-json-schema-export
