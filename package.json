@@ -21,8 +21,10 @@
   },
   "keywords": [
     "postgres",
+    "pg",
     "schema",
     "export",
+    "dump",
     "json",
     "etl",
     "migration",
@@ -30,7 +32,9 @@
     "transform",
     "extract",
     "information_schema",
-    "pg"
+    "pg",
+    "waterline",
+    "sails"
   ],
   "author": "Travis Webb <me@traviswebb.com>",
   "license": "MIT",
