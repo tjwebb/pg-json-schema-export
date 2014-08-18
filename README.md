@@ -78,5 +78,5 @@ MIT
 [npm-url]: https://npmjs.org/package/pg-json-schema-export
 [travis-image]: https://img.shields.io/travis/tjwebb/pg-json-schema-export.svg?style=flat
 [travis-url]: https://travis-ci.org/tjwebb/pg-json-schema-export
-[daviddm-image]: http://img.shields.io/tjwebb/pg-json-schema-export.svg?style=flat
+[daviddm-image]: http://img.shields.io/david/tjwebb/pg-json-schema-export.svg?style=flat
 [daviddm-url]: https://david-dm.org/tjwebb/pg-json-schema-export
