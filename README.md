@@ -22,7 +22,7 @@ var connection =
   port: 5432,
   database: 'thedb'
 };
-PostgresSchema.toJSON(connection)
+PostgresSchema.toJSON(connection, 'public')
   .then(function (schemas) {
     // handle json object
   })
@@ -46,28 +46,34 @@ The output format is for the most part named after the columns in [`information_
 #### JSON
 ```json
 {
-  "public": {
-    "tables": {
-      "user": {
-        "obj_description": "This table has Users in it",
-        "columns": {
-          "name: {
-            "data_type": "text",
-            ...
-          }
+  "tables": {
+    "user": {
+      "obj_description": "This table has Users in it",
+      "columns": {
+        "name: {
+          "data_type": "text",
+          ...
         }
-      },
-      ...
+      }
     },
-    "views": {
-      ...
-    },
-    "sequences": {
-
-    }
+    ...
+  },
+  "constraints": {
+    // column constraints, grouped by table
+  },
+  "sequences": {
+    // column sequences, grouped by table
+  }
 ```
 I auto-generate some JSON during each CI build; those are uploaded as Github releases: https://github.com/tjwebb/pg-json-schema-export/releases/latest
 
+## API
+
+### `toJSON(connection, schema)`
+| parameter | description
+|---|---|
+`connection` | connection string or object compatible with [`pg`](https://github.com/brianc/node-postgres)
+`schema` | the database schema to export
 
 
 ## License
