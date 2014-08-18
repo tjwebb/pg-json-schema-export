@@ -24,9 +24,6 @@ before_script:
   - psql -c 'create role admin;' -U postgres
   - pg_restore -e -d test postbooks_demo_460.backup
 
-after_success:
-  - head -n 500 build/postbooks_demo_460.json
-
 after_failure:
   - env
 

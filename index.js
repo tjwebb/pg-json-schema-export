@@ -36,7 +36,7 @@ exports.toJSON = function (connection, schema) {
     .spread(function (sequences, columns, tables, constraints) {
       var columnGroups = _.groupBy(columns.rows, 'table_name');
       return {
-        _count: {
+        counts: {
           sequences: sequences.rowCount,
           constraints: constraints.rowCount,
           tables: tables.rowCount,
