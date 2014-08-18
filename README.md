@@ -44,7 +44,7 @@ The output format is for the most part named after the columns in [`information_
 
 
 #### JSON
-```json
+```js
 {
   "tables": {
     "user": {
