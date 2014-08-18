@@ -52,11 +52,11 @@ The output format is for the most part named after the columns in [`information_
       "columns": {
         "name: {
           "data_type": "text",
-          ...
+          // ... more columns
         }
       }
     },
-    ...
+    // ... more tables
   },
   "constraints": {
     // column constraints, grouped by table
