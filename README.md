@@ -69,7 +69,7 @@ I auto-generate some JSON during each CI build; those are uploaded as Github rel
 
 ## API
 
-### `toJSON(connection, schema)`
+#### `.toJSON(connection, schema)`
 | parameter | description
 |---|---|
 `connection` | connection string or object compatible with [`pg`](https://github.com/brianc/node-postgres)
