@@ -2,6 +2,8 @@ pg-json-schema-export
 =====================
 
 [![Build Status](https://travis-ci.org/tjwebb/pg-json-schema-export.svg)](https://travis-ci.org/tjwebb/pg-json-schema-export)
+[![NPM version](https://badge.fury.io/js/pg-json-schema-export.svg)](http://badge.fury.io/js/pg-json-schema-export)
+[![Dependency Status](https://david-dm.org/tjwebb/pg-json-schema-export.svg)](https://david-dm.org/tjwebb/pg-json-schema-export)
 
 Export a Postgres schema as JSON
 
