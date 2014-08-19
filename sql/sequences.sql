@@ -5,8 +5,7 @@ select
   sequence_name,
   start_value,
   minimum_value,
-  increment,
-  cycle_option
+  increment
 
 from information_schema.columns
 inner join information_schema.sequences on (
