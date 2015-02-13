@@ -1,11 +1,12 @@
 'use strict';
 
+var path = require('path');
 var Promise = require('bluebird');
 var _ = require('lodash');
 var fs = require('fs');
 var sql = require('./sql');
-var getViewSchemas = fs.readFileSync('./sql/views.sql').toString();
-var getSequences = fs.readFileSync('./sql/sequences.sql').toString();
+var getViewSchemas = fs.readFileSync(path.resolve(__dirname, 'sql/views.sql')).toString();
+var getSequences = fs.readFileSync(path.resolve(__dirname, 'sql/sequences.sql')).toString();
 
 /**
  * Export a pg schema to json.
