@@ -80,9 +80,9 @@ I auto-generate some JSON during each CI build; those are uploaded as Github rel
 MIT
 
 
-[npm-image]: https://img.shields.io/npm/v/pg-json-schema-export.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/pg-json-schema-export.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/pg-json-schema-export
-[travis-image]: https://img.shields.io/travis/tjwebb/pg-json-schema-export.svg?style=flat
+[travis-image]: https://img.shields.io/travis/tjwebb/pg-json-schema-export.svg?style=flat-square
 [travis-url]: https://travis-ci.org/tjwebb/pg-json-schema-export
-[daviddm-image]: http://img.shields.io/david/tjwebb/pg-json-schema-export.svg?style=flat
+[daviddm-image]: http://img.shields.io/david/tjwebb/pg-json-schema-export.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/tjwebb/pg-json-schema-export
