@@ -4,9 +4,10 @@
   "description": "Export a PostgreSQL schema as JSON",
   "main": "index.js",
   "dependencies": {
-    "bluebird": "^2.3.0",
-    "knex": "^0.7",
-    "lodash": "^3.2",
+    "bluebird": "^3.5.1",
+    "knex": "^0.14",
+    "lodash": "^4.17",
+    "pg": "^7.4.0",
     "pg.js": "^4.1"
   },
   "devDependencies": {
