@@ -24,7 +24,7 @@ var getSequences = fs.readFileSync(path.resolve(__dirname, 'sql/sequences.sql'))
  *  }
  * }
  */
-exports.toJSON = function (connection, schema) {
+exports.toJSON = function (connection, schema, knexDestroyCb ) {
   var knex = require('knex')({ client: 'pg', connection: connection });
   var queries = [
     knex.raw(sql.getSequences, [schema]),
@@ -36,6 +36,8 @@ exports.toJSON = function (connection, schema) {
   return Promise.all(queries)
     .spread(function (sequences, columns, tables, constraints) {
       var columnGroups = _.groupBy(columns.rows, 'table_name');
+      var destroyCb = knexDestroyCb || function(){} 
+      knex.destroy( destroyCb );
       return {
         counts: {
           sequences: sequences.rowCount,
