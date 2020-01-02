@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bluebird": "^2.3.0",
-    "knex": "^0.7",
+    "knex": "^0.20",
     "lodash": "^3.2",
     "pg.js": "^4.1"
   },
