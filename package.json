@@ -6,7 +6,7 @@
   "dependencies": {
     "bluebird": "^2.3.0",
     "knex": "^0.7",
-    "lodash": "^3.2",
+    "lodash": "^4.17",
     "pg.js": "^4.1"
   },
   "devDependencies": {
