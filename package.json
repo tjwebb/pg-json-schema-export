@@ -4,13 +4,13 @@
   "description": "Export a PostgreSQL schema as JSON",
   "main": "index.js",
   "dependencies": {
-    "bluebird": "^2.3.0",
-    "knex": "^0.7",
-    "lodash": "^3.2",
-    "pg.js": "^4.1"
+    "bluebird": "^3.7.2",
+    "knex": "^0.20",
+    "lodash": "^4.17",
+    "pg": "^7.17.1"
   },
   "devDependencies": {
-    "mocha": "^1.21.4"
+    "mocha": "^7.0.0"
   },
   "scripts": {
     "test": "mocha --reporter spec"
