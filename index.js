@@ -43,16 +43,16 @@ exports.toJSON = function (connection, schema) {
           tables: tables.rowCount,
           columns: columns.rowCount
         },
-        tables: _.transform(_.indexBy(tables.rows, 'table_name'), function (result, table, name) {
+        tables: _.transform(_.keyBy(tables.rows, 'table_name'), function (result, table, name) {
           result[name] = _.extend(table, {
-            columns: _.indexBy(columnGroups[name], 'column_name')
+            columns: _.keyBy(columnGroups[name], 'column_name')
           });
         }),
         constraints: _.transform(_.groupBy(constraints.rows, 'table_name'), function (result, table, tableName) {
           result[tableName] = _.groupBy(table, 'column_name');
         }),
         sequences: _.transform(_.groupBy(sequences.rows, 'table_name'), function (result, table, tableName) {
-          result[tableName] = _.indexBy(sequences.rows, 'column_name');
+          result[tableName] = _.keyBy(sequences.rows, 'column_name');
         })
       };
     });
