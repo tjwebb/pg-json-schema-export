@@ -15,7 +15,7 @@ $ npm install pg-json-schema-export --save
 ## Usage
 ```js
 var PostgresSchema = require('pg-json-schema-export');
-var connection =
+var connection = {
   user: 'postgres',
   password: '123',
   host: 'localhost',
